@@ -24,7 +24,7 @@ function Settings({ deleteAccount }) {
           </p>
         </div>
         <div>
-          <button className="btn btn-danger" onClick={() => deleteAccount()}>
+          <button className="btn btn-danger" onClick={deleteAccount}>
             Delete Account
           </button>
         </div>

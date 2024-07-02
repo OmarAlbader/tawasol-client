@@ -1,31 +1,30 @@
-import React, { useEffect } from "react"
-import { connect } from "react-redux"
-import { getPosts } from "../../redux/modules/posts"
-import PostForm from "./PostForm"
-import PostItem from "./PostItem"
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getPosts } from "../../redux/modules/posts";
+import PostForm from "./PostForm";
+import PostItem from "./PostItem";
 
-function Posts({getPosts, posts}) {
+const Posts = ({ getPosts, posts }) => {
+  useEffect(() => {
+    getPosts();
+  }, [getPosts]);
 
-    useEffect(() => {
-        getPosts()
-    }, [getPosts])
-
-    return (
-        <div className="home">
-            <div>
-                <PostForm/>
-                <div>
-                    {posts.map(post => (
-                        <PostItem key={post._id} post={post}/>
-                    ))}
-                </div>
-            </div>
+  return (
+    <div className="home">
+      <div>
+        <PostForm />
+        <div>
+          {posts.map((post) => (
+            <PostItem key={post._id} post={post} />
+          ))}
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
-    posts: state.posts.posts
-})
+  posts: state.posts.posts,
+});
 
-export default connect(mapStateToProps, {getPosts})(Posts)
+export default connect(mapStateToProps, { getPosts })(Posts);

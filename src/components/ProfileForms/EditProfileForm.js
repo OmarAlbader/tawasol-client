@@ -18,8 +18,8 @@ const initialState = {
   bio: "",
   twitter: "",
   facebook: "",
-  linkedin: "",
   youtube: "",
+  linkedin: "",
   instagram: "",
   github: "",
 };
@@ -29,7 +29,6 @@ const ProfileForm = ({
   createProfile,
   getCurrentProfile,
   uploadProfileImage,
-  history,
 }) => {
   const [formData, setFormData] = useState(initialState);
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
@@ -39,11 +38,32 @@ const ProfileForm = ({
       getCurrentProfile();
     }
     if (profile && !loading) {
-      const profileData = { ...initialState };
+      const profileData = { ...profile };
       // TODO
       setFormData(profileData);
     }
   }, [loading, getCurrentProfile, profile]);
+
+  useEffect(() => {
+    setFormData({
+      company: loading || !profile.company ? "" : profile.company,
+      website: loading || !profile.website ? "" : profile.website,
+      location: loading || !profile.location ? "" : profile.location,
+      country: loading || !profile.country ? "" : profile.country,
+      status: loading || !profile.status ? "" : profile.status,
+      skills: loading || !profile.skills ? "" : profile.skills,
+      bio: loading || !profile.bio ? "" : profile.bio,
+      twitter: loading || !profile.social.twitter ? "" : profile.social.twitter,
+      facebook:
+        loading || !profile.social.facebook ? "" : profile.social.facebook,
+      linkedin:
+        loading || !profile.social.linkedin ? "" : profile.social.linkedin,
+      youtube: loading || !profile.social.youtube ? "" : profile.social.youtube,
+      instagram:
+        loading || !profile.social.instagram ? "" : profile.social.instagram,
+      github: loading || !profile.social.github ? "" : profile.social.github,
+    });
+  }, [profile, loading]);
 
   const {
     company,
@@ -55,15 +75,15 @@ const ProfileForm = ({
     bio,
     twitter,
     facebook,
-    linkedin,
     youtube,
+    linkedin,
     instagram,
     github,
   } = formData;
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createProfile(formData, history, profile ? true : false);
+    createProfile(formData, profile._id);
   };
 
   const onFileChange = (e) => {

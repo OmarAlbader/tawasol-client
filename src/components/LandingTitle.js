@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 const TITLES = [
-    "Create your TawaSol profile and connect with other developers",
-    "TawaSol is the first website in the Arab World to connect engineers",
-    "Build a professional network with other developers"
+  "Create your TawaSol profile and connect with other developers",
+  "TawaSol is the first website in the Arab World to connect engineers",
+  "Build a professional network with other developers",
 ];
 
 const LandingTitle = () => {
@@ -13,13 +13,11 @@ const LandingTitle = () => {
   useEffect(() => {
     let timeout = null;
     let titleInterval = null;
+
     titleInterval = setInterval(() => {
       const index = (titleIndex + 1) % TITLES.length;
       setTitleIndex(index);
       setFadeIn(true);
-      timeout = setTimeout(() => {
-        setFadeIn(false);
-      }, 2000);
     }, 4000);
 
     timeout = setTimeout(() => {
@@ -27,8 +25,9 @@ const LandingTitle = () => {
     }, 2000);
 
     return function cleanup() {
-      clearInterval(titleInterval);
+      // Cleanup function
       clearTimeout(timeout);
+      clearInterval(titleInterval);
     };
   }, [titleIndex]);
 

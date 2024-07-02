@@ -1,12 +1,12 @@
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension"
+import {configureStore } from "@reduxjs/toolkit"
 import rootReducer from "./modules";
 import { setAuthToken } from "../utils";
 
-const initialState = {};
-
-const store = createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware(thunk)) );
+const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    devTools: true,
+})
 
 let currentState = store.getState()
 
