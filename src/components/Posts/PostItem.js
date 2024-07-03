@@ -34,7 +34,7 @@ const PostItem = ({
                 onClick={() => addLike(_id)}
               >
                 <i className="fas fa-thumbs-up" />
-                <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
+                {likes.length > 0 && <span> {likes.length}</span>}
               </button>{" "}
               <button
                 type="button"
@@ -44,7 +44,7 @@ const PostItem = ({
                 <i className="fas fa-thumbs-down" />
               </button>
               <Link to={`/posts/${_id}`} className="btn btn-primary">
-                Discussion
+                Discussion&nbsp;
                 {comments.length > 0 && (
                   <span className="comment-count">{comments.length}</span>
                 )}

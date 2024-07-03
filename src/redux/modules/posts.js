@@ -57,6 +57,9 @@ export const addLike = (id) => async (dispatch) => {
       payload: { id, likes: res.data },
     });
   } catch (err) {
+    const error = err.response.data.msg;
+
+    dispatch(showAlertMessage(error, "error"));
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -74,6 +77,9 @@ export const removeLike = (id) => async (dispatch) => {
       payload: { id, likes: res.data },
     });
   } catch (err) {
+    const error = err.response.data.msg;
+
+    dispatch(showAlertMessage(error, "error"));
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -134,6 +140,8 @@ export const addComment = (postId, formData) => async (dispatch) => {
 
     dispatch(showAlertMessage("Comment Added", "success"));
   } catch (err) {
+    const error = "Comment Can't be empty";
+    dispatch(showAlertMessage(error, "error"));
     dispatch({
       type: POST_ERROR,
       payload: {
@@ -192,11 +200,13 @@ export default function reducer(state = initialState, action) {
     case ADD_POST:
       return {
         ...state,
+        posts: [payload, ...state.posts],
         loading: false,
       };
     case DELETE_POST:
       return {
         ...state,
+        posts: state.posts.filter((post) => post._id !== payload),
         loading: false,
       };
     case POST_ERROR:
@@ -208,16 +218,26 @@ export default function reducer(state = initialState, action) {
     case UPDATE_LIKES:
       return {
         ...state,
+        posts: state.posts.map((post) =>
+          post._id === payload.id ? { ...post, likes: payload.likes } : post
+        ),
         loading: false,
       };
     case ADD_COMMENT:
       return {
         ...state,
+        post: { ...state.post, comments: payload },
         loading: false,
       };
     case REMOVE_COMMENT:
       return {
         ...state,
+        post: {
+          ...state.post,
+          comments: state.post.comments.filter(
+            (comment) => comment._id !== payload
+          ),
+        },
         loading: false,
       };
     default:

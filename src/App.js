@@ -21,8 +21,7 @@ import Developers from "./components/Developers";
 import Profile from "./components/Profile";
 import Settings from "./components/Settings";
 import Posts from "./components/Posts/Posts";
-// import Settings from "./components/Settings";
-// import Post from "./components/Posts/Post";
+import Post from "./components/Posts/Post";
 import "./App.css";
 
 const options = {
@@ -95,6 +94,11 @@ const App = () => {
                 exact
                 path="/posts"
                 element={<Private component={Posts} />}
+              />
+              <Route
+                exact
+                path="/posts/:id"
+                element={<Private component={Post} />}
               />
             </Routes>
           </Fragment>
