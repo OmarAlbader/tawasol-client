@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { getProfileImage } from "../../utils";
+import { formatDate, getProfileImage } from "../../utils";
 import {
   editComment,
   deleteComment,
@@ -42,6 +42,7 @@ const CommentItem = ({
   const [image, setImage] = useState("");
   const [errored, setErrored] = useState(false);
 
+  // TODO: fix race condition in like and dislike
   const likeHandle = () => {
     // Insuring that the user will either like or dislike the post and not both in the same time.
     if (dislike) {
@@ -188,7 +189,11 @@ const CommentItem = ({
           )}
 
           <small style={{ color: "gray" }}>
-            Since {moment(date).fromNow()}
+            Since{" "}
+            {
+              moment(date).fromNow()
+              /*formatDate(date)*/
+            }
           </small>
           <div>
             <button

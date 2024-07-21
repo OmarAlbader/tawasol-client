@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+// import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -45,10 +46,16 @@ const ProfileForm = ({
     "Intern",
   ];
 
+  // TODO [DONE] retrieve other's info when go to their profile then immediately go to setting > edit account
   useEffect(() => {
     if (!profile || profile.user._id !== user._id) {
       getCurrentProfile();
     }
+
+    // if (profile && !loading) {
+    //   const profileData = { ...profile };
+    //   setFormData(profileData);
+    // }
   }, [getCurrentProfile, profile, loading, user]);
 
   useEffect(() => {

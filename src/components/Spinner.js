@@ -1,8 +1,15 @@
 import React, { Fragment } from "react";
 import { TailSpin } from "react-loader-spinner";
+// import spinner from "../assets/spinner.gif";
 
 const Spinner = () => (
   <Fragment>
+    {/* <img
+      src={spinner}
+      id="loaderImg"
+      style={{ width: "200px", margin: "auto", display: "block" }}
+      alt="Loading..."
+    ></img> */}
     <div id="loader">
       <TailSpin
         visible={true}

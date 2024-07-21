@@ -39,6 +39,36 @@ const PostItem = ({
   const [image, setImage] = useState("");
   const [errored, setErrored] = useState(false);
 
+  //* Another method to insure that the user will either like or dislike the post and not both in the same time. (using useEffect)
+  // useEffect(() => {
+  //   if (like) {
+  //     if (dislike) {
+  //       removeDislike(_id);
+  //       setDislike(false);
+  //     }
+
+  //     if (likes.every((like) => like.user !== users.user._id)) addLike(_id);
+  //   } else if (likes.some((like) => like.user === users.user._id)) {
+  //     removeLike(_id);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [like]);
+
+  // useEffect(() => {
+  //   if (dislike) {
+  //     if (like) {
+  //       removeLike(_id);
+  //       setLike(false);
+  //     }
+
+  //     if (dislikes.every((dislike) => dislike.user !== users.user._id))
+  //       addDislike(_id);
+  //   } else if (dislikes.some((dislike) => dislike.user === users.user._id)) {
+  //     removeDislike(_id);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [dislike]);
+
   const likeHandle = () => {
     // Insuring that the user will either like or dislike the post and not both in the same time.
     if (dislike) {
@@ -173,7 +203,11 @@ const PostItem = ({
           )}
 
           <small style={{ color: "gray" }}>
-            Since {moment(date).fromNow()}
+            Since{" "}
+            {
+              moment(date).fromNow()
+              /*Posted at {formatDate(date)}*/
+            }
           </small>
           {showActions && (
             <div>
@@ -224,6 +258,7 @@ const PostItem = ({
                       <i className="fas fa-edit" />
                     </button>
                   )}
+                  {/* change the color of below button to red */}
                   <button
                     type="button"
                     className="btn btn-light"
