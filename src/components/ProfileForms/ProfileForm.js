@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   createProfile,
   getCurrentProfile,
@@ -33,16 +33,21 @@ const ProfileForm = ({
 }) => {
   const [formData, setFormData] = useState(initialState);
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
+  const [other, setOther] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!profile) {
       getCurrentProfile();
+    } else {
+      navigate("/home");
     }
     if (profile && !loading) {
       const profileData = { ...initialState };
-      // TODO
       setFormData(profileData);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, getCurrentProfile, profile]);
 
   const {
@@ -73,7 +78,18 @@ const ProfileForm = ({
   };
 
   const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === "status") {
+      if (e.target.value === "Other") setOther(true);
+      else {
+        setOther(false);
+      }
+    }
+
+    if (e.target.name === "Other") {
+      setFormData({ ...formData, status: e.target.value });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
   };
 
   return (
@@ -92,9 +108,22 @@ const ProfileForm = ({
             <option value="Student">Student</option>
             <option value="Instructor">Instructor</option>
             <option value="Intern">Intern</option>
-            <option value="Other">Other</option>
+            <option value="Other">Other</option>{" "}
+            {/* // TODO [DONE] when select other show input to enter text
+             */}
           </select>
         </div>
+        {other && (
+          <div>
+            <input
+              type="text"
+              name="Other"
+              placeholder="Professional Status"
+              value={status === "Other" ? "" : status}
+              onChange={onChange}
+            />
+          </div>
+        )}
         <div className="form-group">
           <input type="file" onChange={onFileChange}></input>
         </div>

@@ -11,10 +11,17 @@ const PostForm = ({ addPost }) => {
     setText("");
   };
 
+  const handleEnterKeyDown = (e) => {
+    // Submit when press "Enter" key
+    if (e.keyCode === 13 && !e.shiftKey) {
+      onSubmit(e);
+    }
+  };
+
   return (
-    <div className="post-card">
+    <div className="post-card show">
       <p className="form-title center">Create Post</p>
-      <hr></hr>
+      <hr style={{ marginBottom: "10px" }} />
       <form onSubmit={onSubmit}>
         <div>
           <textarea
@@ -23,9 +30,15 @@ const PostForm = ({ addPost }) => {
             value={text}
             required
             onChange={(e) => setText(e.target.value)}
+            onKeyDown={handleEnterKeyDown}
           />
         </div>
-        <input type="submit" value="Post" className="btn btn-primary" />
+        <input
+          type="submit"
+          value="Post"
+          className="btn btn-primary"
+          style={{ color: "#f4ce14" }}
+        />
       </form>
     </div>
   );

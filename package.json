@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "homepage": "https://OmarAlbader.github.io/tawasol-client",
+  "homepage": "https://OmarAlbader.github.io/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -24,6 +24,7 @@
     "react-alert": "^7.0.3",
     "react-alert-template-basic": "^1.0.2",
     "react-dom": "^17.0.2",
+    "react-loader-spinner": "^6.1.6",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",

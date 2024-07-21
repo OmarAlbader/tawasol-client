@@ -23,7 +23,7 @@ const Navbar = ({ users: { isAuthenticated }, logout }) => {
   );
 
   return (
-    <nav className="navbar bg-navbar">
+    <nav className="navbar bg-navbar light-theme" id="navbar">
       <h1>
         <Link className="logo-navbar" to="/">
           TawaSol

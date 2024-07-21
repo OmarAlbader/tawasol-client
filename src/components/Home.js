@@ -51,12 +51,13 @@ const Home = ({
           <div className="home-row">
             <div style={{ textAlign: "center" }} className="home-column">
               <img
-                src={image}
+                src={image || setImage(defaultImg)}
                 className="profile-picture"
                 alt="profile"
                 onError={onError}
               ></img>
               <p className="name">{profile.user.name}</p>
+              <small style={{ color: "gray" }}>{profile.status}</small>
             </div>
             <div className="home-column">
               <BasicInfo profile={profile} />

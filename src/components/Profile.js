@@ -39,6 +39,7 @@ const Profile = ({ getProfileById, profiles: { profile } }) => {
                 onError={onError}
               ></img>
               <p className="name">{profile.user.name}</p>
+              <small style={{ color: "gray" }}>{profile.status}</small>
             </div>
             <div className="home-column">
               <BasicInfo profile={profile} />

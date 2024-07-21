@@ -21,9 +21,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-// const connectToStore = connect(mapStateToProps);
-// const ConnectedComponent = connectToStore(Alert);
-
-// export default ConnectedComponent;
-
 export default connect(mapStateToProps)(Alert);

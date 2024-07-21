@@ -1,13 +1,20 @@
 import React, { Fragment } from "react";
-import spinner from "../assets/spinner.gif";
+import { TailSpin } from "react-loader-spinner";
 
 const Spinner = () => (
   <Fragment>
-    <img
-      src={spinner}
-      style={{ width: "200px", margin: "auto", display: "block" }}
-      alt="Loading..."
-    ></img>
+    <div id="loader">
+      <TailSpin
+        visible={true}
+        height="80"
+        width="80"
+        color="black"
+        ariaLabel="tail-spin-loading"
+        radius="1"
+        wrapperStyle={{}}
+        wrapperClass="loader"
+      />
+    </div>
   </Fragment>
 );
 

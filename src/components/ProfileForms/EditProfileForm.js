@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -26,44 +25,56 @@ const initialState = {
 
 const ProfileForm = ({
   profiles: { profile, loading },
+  users: { user },
+  history,
   createProfile,
   getCurrentProfile,
   uploadProfileImage,
 }) => {
   const [formData, setFormData] = useState(initialState);
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
+  const [other, setOther] = useState(false);
+
+  const statusOptions = [
+    "Developer",
+    "Junior Developer",
+    "Senior Developer",
+    "Manager",
+    "Student",
+    "Instructor",
+    "Intern",
+  ];
 
   useEffect(() => {
-    if (!profile) {
+    if (!profile || profile.user._id !== user._id) {
       getCurrentProfile();
     }
-    if (profile && !loading) {
-      const profileData = { ...profile };
-      // TODO
-      setFormData(profileData);
-    }
-  }, [loading, getCurrentProfile, profile]);
+  }, [getCurrentProfile, profile, loading, user]);
 
   useEffect(() => {
-    setFormData({
-      company: loading || !profile.company ? "" : profile.company,
-      website: loading || !profile.website ? "" : profile.website,
-      location: loading || !profile.location ? "" : profile.location,
-      country: loading || !profile.country ? "" : profile.country,
-      status: loading || !profile.status ? "" : profile.status,
-      skills: loading || !profile.skills ? "" : profile.skills,
-      bio: loading || !profile.bio ? "" : profile.bio,
-      twitter: loading || !profile.social.twitter ? "" : profile.social.twitter,
-      facebook:
-        loading || !profile.social.facebook ? "" : profile.social.facebook,
-      linkedin:
-        loading || !profile.social.linkedin ? "" : profile.social.linkedin,
-      youtube: loading || !profile.social.youtube ? "" : profile.social.youtube,
-      instagram:
-        loading || !profile.social.instagram ? "" : profile.social.instagram,
-      github: loading || !profile.social.github ? "" : profile.social.github,
-    });
-  }, [profile, loading]);
+    if (!loading && profile && profile.user._id === user._id) {
+      if (statusOptions.every((option) => option !== profile?.status)) {
+        setOther(true);
+      }
+
+      setFormData({
+        company: profile.company,
+        website: profile.website,
+        location: profile.location,
+        country: profile.country,
+        status: profile.status,
+        skills: profile.skills,
+        bio: profile.bio,
+        twitter: profile.social.twitter,
+        facebook: profile.social.facebook,
+        linkedin: profile.social.linkedin,
+        youtube: profile.social.youtube,
+        instagram: profile.social.instagram,
+        github: profile.social.github,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profile, loading, user]);
 
   const {
     company,
@@ -83,7 +94,7 @@ const ProfileForm = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createProfile(formData, profile._id);
+    createProfile(formData, history, profile ? true : false);
   };
 
   const onFileChange = (e) => {
@@ -93,7 +104,18 @@ const ProfileForm = ({
   };
 
   const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === "status") {
+      if (e.target.value === "Other") setOther(true);
+      else {
+        setOther(false);
+      }
+    }
+
+    if (e.target.name === "Other") {
+      setFormData({ ...formData, status: e.target.value });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
   };
 
   return (
@@ -101,7 +123,11 @@ const ProfileForm = ({
       <p className="form-title">Edit Profile</p>
       <form className="form1" onSubmit={onSubmit}>
         <div className="form-group">
-          <select name="status" value={status} onChange={onChange}>
+          <select
+            name="status"
+            value={other ? "Other" : status}
+            onChange={onChange}
+          >
             <option value="" disabled>
               * Select Professional Status
             </option>
@@ -115,6 +141,17 @@ const ProfileForm = ({
             <option value="Other">Other</option>
           </select>
         </div>
+        {other && (
+          <div>
+            <input
+              type="text"
+              name="Other"
+              placeholder="Professional Status"
+              value={status === "Other" ? "" : status}
+              onChange={onChange}
+            />
+          </div>
+        )}
         <div className="form-group">
           <input type="file" onChange={onFileChange}></input>
         </div>
@@ -267,6 +304,7 @@ ProfileForm.propTypes = {
 
 const mapStateToProps = (state) => ({
   profiles: state.profiles,
+  users: state.users,
 });
 
 export default connect(mapStateToProps, {

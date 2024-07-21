@@ -28,6 +28,7 @@ export function register(formData) {
     try {
       // call API /users/register
       const res = await api.post("/users/register", formData);
+
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
@@ -57,6 +58,7 @@ export function login(email, password) {
   return async function loginThunk(dispatch) {
     try {
       const res = await api.post("/users/login", { email, password });
+
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,

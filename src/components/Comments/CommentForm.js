@@ -22,7 +22,7 @@ const CommentForm = ({ postId, addComment }) => {
   return (
     <div className="post-card">
       <p className="form-title center">Leave a Comment</p>
-      <hr></hr>
+      <hr style={{ marginBottom: "10px" }} />
       <form onSubmit={onSubmit}>
         <div>
           <textarea
@@ -33,7 +33,12 @@ const CommentForm = ({ postId, addComment }) => {
             onKeyDown={handleEnterKeyDown}
           />
         </div>
-        <input type="submit" value="Post" className="btn btn-primary" />
+        <input
+          type="submit"
+          value="Post"
+          className="btn btn-primary"
+          style={{ color: "#f4ce14" }}
+        />
       </form>
     </div>
   );

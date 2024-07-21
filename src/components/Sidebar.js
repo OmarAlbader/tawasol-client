@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCurrentProfile } from "../redux/modules/profiles";
@@ -23,18 +23,59 @@ function Sidebar({ users: { user }, getCurrentProfile }) {
     }
   }
 
+  const location = useLocation();
   return (
     <div>
-      <div className="sidebar">
-        <div>
+      <div className="sidebar" id="sidebar">
+        <div className="pfp-circle">
           <Link to="/home">
-            <img src={image} onError={onError} className="profile" alt="" />
+            <img
+              src={image || setImage(defaultImg)}
+              onError={onError}
+              className="profile"
+              alt=""
+            />
           </Link>
         </div>
-        <Link to="/home">Home</Link>
-        <Link to="/posts">Posts</Link>
-        <Link to="/developers">Developers</Link>
-        <Link to="/settings">Settings</Link>
+
+        <div
+          className={`link-style${
+            location.pathname === "/home" || location.pathname === "/home"
+              ? " active"
+              : ""
+          }`}
+        >
+          <Link to="/home">Home</Link>
+          <i className="fas fa-home-user" />
+        </div>
+        <div
+          className={`link-style${
+            location.pathname === "/posts" ? " active" : ""
+          }`}
+        >
+          <Link to="/posts">Posts</Link>
+          <i className="fas fa-images" />
+        </div>
+        <div
+          className={`link-style${
+            location.pathname === "/developers" ? " active" : ""
+          }`}
+        >
+          <Link to="/developers">Developers</Link>
+          <i className="fas fa-people-group" />
+        </div>
+        <div
+          className={`link-style settings${
+            location.pathname === "/settings" ||
+            location.pathname === "/edit-profile"
+              ? " active"
+              : ""
+          }`}
+          id="settings"
+        >
+          <Link to="/settings">Settings</Link>
+          <i className="fas fa-gear" />
+        </div>
       </div>
     </div>
   );
