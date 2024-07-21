@@ -289,6 +289,9 @@ body {
         stroke: var(--primary-color);
       }
     }
+    & i.fab {
+      color: var(--light-color);
+    }
   }
 }
 
