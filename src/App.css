@@ -62,6 +62,7 @@ input:checked[id="mode"][type="checkbox"]::before {
 
 /* Change theme mode button */
 .mode-container {
+  z-index: 1;
   position: fixed;
   overflow: hidden;
   bottom: 75px;
@@ -69,7 +70,7 @@ input:checked[id="mode"][type="checkbox"]::before {
   width: 80px;
   height: 40px;
   border-radius: 20px;
-  background-color: transparent;
+  background-color: var(--white-color);
   & #moon {
     position: relative;
     width: 20px;
@@ -752,7 +753,7 @@ small {
   transition: 0.5s;
 }
 
-.navbar ul {
+.navbar {
   display: flex;
 }
 
@@ -958,11 +959,28 @@ a {
 }
 
 @media screen and (max-width: 1000px) {
+  .mode-container {
+    bottom: 7.5vh;
+    right: 5vh;
+  }
+  .mode-click {
+    bottom: 7.5vh;
+    right: 5vh;
+  }
   .sidebar {
-    display: none;
+    right: 0;
+    & .link-style > .fas {
+      display: none;
+    }
+  }
+  .navbar {
+    flex-direction: row-reverse;
   }
   .home {
     margin-left: 0;
+    & .row {
+      margin-left: 0;
+    }
   }
   .post-card {
     width: 100%;

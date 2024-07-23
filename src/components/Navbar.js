@@ -29,6 +29,7 @@ const Navbar = ({ users: { isAuthenticated }, logout }) => {
           TawaSol
         </Link>
       </h1>
+      {/* //TODO: menu button for mobiles to show sidebar */}
       <Fragment>{isAuthenticated ? authlinks : links}</Fragment>
     </nav>
   );

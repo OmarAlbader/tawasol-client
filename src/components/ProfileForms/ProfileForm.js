@@ -95,7 +95,7 @@ const ProfileForm = ({
   return (
     <div className="main" style={{ width: 600, textAlign: "center" }}>
       <p className="form-title">Edit Profile</p>
-      <form className="form1" onSubmit={onSubmit}>
+      <form className="form1" onSubmit={onSubmit} encType="multipart/form-data">
         <div className="form-group">
           <select name="status" value={status} onChange={onChange}>
             <option value="" disabled>
