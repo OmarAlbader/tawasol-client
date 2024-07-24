@@ -126,7 +126,7 @@ const ProfileForm = ({
   };
 
   return (
-    <div className="main" style={{ width: 600, textAlign: "center" }}>
+    <div className="main">
       <p className="form-title">Edit Profile</p>
       <form className="form1" onSubmit={onSubmit}>
         <div className="form-group">

@@ -108,6 +108,7 @@ input:checked[id="mode"][type="checkbox"]::before {
   height: 40px;
   border-radius: 20px;
   background-color: transparent;
+  opacity: 0.5;
   z-index: 2;
   cursor: pointer;
 
@@ -186,6 +187,9 @@ body {
       border-radius: 47.5%;
       width: 35px;
       left: 5px;
+    }
+    & i.fas {
+      color: var(--white-color);
     }
   }
 
@@ -290,8 +294,8 @@ body {
         stroke: var(--primary-color);
       }
     }
-    & i.fab {
-      color: var(--light-color);
+    & i.fas {
+      color: var(--white-color);
     }
   }
 }
@@ -751,10 +755,10 @@ small {
   z-index: 99;
   font-family: "Zilla Slab Highlight";
   transition: 0.5s;
-}
 
-.navbar {
-  display: flex;
+  & i {
+    display: none;
+  }
 }
 
 .navbar a {
@@ -846,6 +850,8 @@ ul {
   border-radius: 10px;
   padding-top: 40px;
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+  width: 600px;
+  text-align: center;
 }
 
 .logo {
@@ -896,7 +902,7 @@ textarea {
   outline: none;
   box-sizing: border-box;
   border: 2px solid rgba(0, 0, 0, 0.1);
-  margin-left: 46px;
+  margin-left: 4%;
   text-align: left;
   margin-bottom: 27px;
 }
@@ -956,9 +962,6 @@ a {
   .add-button {
     float: left;
   }
-}
-
-@media screen and (max-width: 1000px) {
   .mode-container {
     bottom: 7.5vh;
     right: 5vh;
@@ -967,15 +970,218 @@ a {
     bottom: 7.5vh;
     right: 5vh;
   }
+}
+
+@media screen and (max-width: 1000px) {
+  .main {
+    width: 80%;
+    & input.input-text {
+      margin-left: 40px;
+    }
+  }
+
+  .btn {
+    width: 90px;
+  }
+
+  .home {
+    & > div {
+      width: 90%;
+      margin-left: 5%;
+    }
+    & > .row {
+      width: 80%;
+      position: relative;
+      left: 10%;
+    }
+  }
+
+  .post-card {
+    margin-bottom: 20px;
+  }
+
+  .btn-light {
+    background-color: var(--dark-color);
+    color: var(--white-color);
+    margin: 10px 10px 20px 0;
+  }
+
+  .landing {
+    width: 110%;
+    left: -20px;
+  }
+
+  .landing-inner p {
+    width: 70%;
+    margin-bottom: 15px;
+  }
+
+  .navbar {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    flex-grow: 1;
+    & #logout {
+      display: none;
+    }
+    & #tawasol-logo {
+      margin-left: -58vw;
+    }
+    & i {
+      display: initial;
+      position: relative;
+      left: 10px;
+      font-size: larger;
+      cursor: pointer;
+    }
+  }
+
   .sidebar {
-    right: 0;
-    & .link-style > .fas {
+    height: 100%;
+    width: 175px;
+    position: fixed;
+    z-index: 1;
+    top: 55px;
+    left: 0px;
+    background: var(--secondary-color);
+    overflow-x: hidden;
+    padding-top: 16px;
+    border-right: 3px solid var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+    font-family: "Lato", sans-serif;
+    transition: 0.5s;
+
+    & .pfp-circle {
+      top: 15px;
+    }
+    & .link-style {
+      visibility: visible;
+      left: 15px;
+    }
+    .active a::after {
+      transform: scaleX(1);
+    }
+    & a:hover {
+      text-shadow: 0;
+      &::after {
+        transform: scaleX(0);
+      }
+    }
+    &:not(.active) a:hover {
+      opacity: 1;
+      text-shadow: 0 0 0;
+    }
+    & a:focus {
+      text-shadow: -2px 2px 2px #000;
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+
+  * :not(.sidebar):focus {
+    & .sidebar {
       display: none;
     }
   }
-  .navbar {
-    flex-direction: row-reverse;
+
+  .mode-container {
+    z-index: 99;
+    position: fixed;
+    overflow: hdden;
+    top: 15px;
+    right: 25px;
+    width: 75px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: var(--white-color);
+    transition: 0.5s;
+    & #moon {
+      position: relative;
+      width: 15px;
+      height: 15px;
+      top: -37.5px;
+      left: -80px;
+      color: var(--dark-color);
+      transition: 0.5s;
+    }
+    & input:checked[id="mode"][type="checkbox"] ~ #sun {
+      left: 12.5px;
+      ~ #moon {
+        left: 145px;
+      }
+    }
+    & #sun {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      top: -37px;
+      left: -95px;
+      color: var(--white-color);
+      transition: 0.5s;
+    }
+    & input[id="mode"][type="checkbox"] ~ #moon {
+      left: 30px;
+    }
   }
+
+  .mode-click {
+    position: fixed;
+    top: 15px;
+    right: 25px;
+    width: 75px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: transparent;
+    z-index: 1;
+    cursor: pointer;
+    transition: 0.25s;
+
+    &:hover ~ input[id="mode"][type="checkbox"]::before {
+      opacity: 1;
+    }
+  }
+
+  body.dark-theme
+    .mode-click:active
+    ~ input[id="mode"][type="checkbox"]::before {
+    border-radius: 47.5%;
+    width: 35px;
+    left: -5px;
+  }
+
+  input[id="mode"][type="checkbox"] {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 75px;
+    height: 35px;
+    appearance: none;
+    outline: none;
+    border-radius: 20px;
+    box-shadow: inset 0 2px 2px var(--dark-color),
+      inset 0 -2px 2px var(--dark-color);
+    transition: 0.5s;
+    cursor: pointer;
+  }
+
+  input[id="mode"][type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    top: 4px;
+    left: 4px;
+    background-color: var(--secondary-color);
+    box-shadow: inset 0 2px 2px #ffffff33, inset 0 -2px 2px #ffffff33;
+    transition: 0.5s;
+  }
+
+  input:checked[id="mode"][type="checkbox"] {
+    background-color: var(--dark-color);
+  }
+
   .home {
     margin-left: 0;
     & .row {

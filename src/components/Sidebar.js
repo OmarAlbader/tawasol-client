@@ -37,7 +37,6 @@ function Sidebar({ users: { user }, getCurrentProfile }) {
             />
           </Link>
         </div>
-
         <div
           className={`link-style${
             location.pathname === "/home" || location.pathname === "/home"
@@ -76,6 +75,7 @@ function Sidebar({ users: { user }, getCurrentProfile }) {
           <Link to="/settings">Settings</Link>
           <i className="fas fa-gear" />
         </div>
+        {/* // Todo: add logout on mobiles below settings */}
       </div>
     </div>
   );

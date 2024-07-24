@@ -9,10 +9,16 @@ let scrollDownCount = 0;
 
 window.addEventListener("scroll", function () {
   if (document.body.getBoundingClientRect().top > scrollPos) {
-    document.getElementById("navbar").style.top = "0";
-    document.getElementById("navbar").style.borderBottomWidth = "3px";
+    const navbar = document.getElementById("navbar");
+    navbar.style.borderBottomWidth = "3px";
+    navbar.style.top = "0";
 
     if (document.getElementById("sidebar") !== null) {
+      if (window.matchMedia("(max-width: 1000px)").matches) {
+        document.getElementsByClassName("mode-container")[0].style.top = "15px";
+        document.getElementsByClassName("mode-click")[0].style.top = "15px";
+      }
+
       document.getElementById("sidebar").style.top = "55px";
 
       document.getElementById("settings").style.bottom = "75px";
@@ -24,13 +30,30 @@ window.addEventListener("scroll", function () {
     if (scrollDownCount - document.body.getBoundingClientRect().top >= 150) {
       document.getElementById("navbar").style.top = "-68px";
 
+      if (window.matchMedia("(max-width: 1000px)").matches) {
+        document.getElementsByClassName("mode-container")[0].style.top =
+          "-55px";
+        document.getElementsByClassName("mode-click")[0].style.top = "-55px";
+      }
+
       if (document.getElementById("sidebar") !== null) {
         document.getElementById("sidebar").style.top = "0";
 
         document.getElementById("settings").style.bottom = "20px";
       }
+
       // Scrolling DOWN
     }
+  }
+
+  if (window.matchMedia("(min-width: 1000px)").matches) {
+    const modeBtn = document.getElementsByClassName("mode-container")[0];
+    modeBtn.style.top = "85vh";
+    modeBtn.style.right = "40px";
+
+    const modeClick = document.getElementsByClassName("mode-click")[0];
+    modeClick.style.top = "85vh";
+    modeClick.style.right = "40px";
   }
 
   scrollPos = document.body.getBoundingClientRect().top;

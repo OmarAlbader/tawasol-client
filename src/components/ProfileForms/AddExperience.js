@@ -6,17 +6,17 @@ import { addExperience } from "../../redux/modules/profiles";
 
 const AddExperience = ({ addExperience, history }) => {
   const [formData, setFormData] = useState({
-    company: '',
-    title: '',
-    location: '',
-    from: '',
-    to: '',
-    current: false
+    company: "",
+    title: "",
+    location: "",
+    from: "",
+    to: "",
+    current: false,
   });
 
   const { company, title, location, from, to, current } = formData;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
@@ -25,10 +25,7 @@ const AddExperience = ({ addExperience, history }) => {
   };
 
   return (
-    <div
-      className="main"
-      style={{ textAlign: "center", width: 700, padding: 15 }}
-    >
+    <div className="main">
       <p className="form-title">Add Experience</p>
       <small>* = required field</small>
       <form className="form1" onSubmit={onSubmit}>
@@ -60,11 +57,11 @@ const AddExperience = ({ addExperience, history }) => {
           />
         </div>
         <div>
-        <h3 style={{marginLeft:110, textAlign:"left"}}>From Date</h3>
+          <h3 style={{ marginLeft: 110, textAlign: "left" }}>From Date</h3>
           <input type="date" name="from" value={from} onChange={onChange} />
         </div>
         <div className="">
-          <p style={{marginLeft:110, textAlign:"left", marginBottom:20}}>
+          <p style={{ marginLeft: 110, textAlign: "left", marginBottom: 20 }}>
             <input
               type="checkbox"
               name="current"
@@ -76,7 +73,7 @@ const AddExperience = ({ addExperience, history }) => {
           </p>
         </div>
         <div className="">
-        <h3 style={{marginLeft:110, textAlign:"left"}}>To Date</h3>
+          <h3 style={{ marginLeft: 110, textAlign: "left" }}>To Date</h3>
           <input
             type="date"
             name="to"
@@ -86,7 +83,7 @@ const AddExperience = ({ addExperience, history }) => {
           />
         </div>
         <input type="submit" className="btn btn-primary" />
-        <Link className="btn btn-light" to="/home">
+        <Link className="btn btn-light" id="back-btn" to="/home">
           Go Back
         </Link>
       </form>
