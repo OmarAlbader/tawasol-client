@@ -195,7 +195,7 @@ const CommentItem = ({
               /*formatDate(date)*/
             }
           </small>
-          <div>
+          <div className="comment-buttons">
             <button
               type="button"
               id="like"

@@ -4,6 +4,20 @@ const DarkMode = () => {
   const [mode, setMode] = useState(localStorage.getItem("mode") || "light");
 
   useEffect(() => {
+    if (
+      // detect the OS's preferred color scheme
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      setMode("dark");
+      localStorage.setItem("mode", "dark");
+    } else {
+      setMode("light");
+      localStorage.setItem("mode", "light");
+    }
+  }, []);
+
+  useEffect(() => {
     if (mode === "dark") {
       localStorage.setItem("mode", "dark");
 

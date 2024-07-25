@@ -46,6 +46,7 @@ const Navbar = ({ users: { isAuthenticated }, logout }) => {
       </h1>
       {/* //TODO: menu button for mobiles to show sidebar */}
       <Fragment>{isAuthenticated ? authlinks : links}</Fragment>
+      <div id="X">X</div>
     </nav>
   );
 };

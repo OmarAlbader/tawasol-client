@@ -128,6 +128,7 @@ const ProfileForm = ({
   return (
     <div className="main">
       <p className="form-title">Edit Profile</p>
+      <small>* = required field</small>
       <form className="form1" onSubmit={onSubmit}>
         <div className="form-group">
           <select

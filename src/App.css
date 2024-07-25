@@ -175,7 +175,7 @@ body {
       }
     }
     & p {
-      color: var(--dark-color);
+      /* color: var(--dark-color); */
       & a {
         color: var(--secondary-color);
         &:hover {
@@ -188,8 +188,8 @@ body {
       width: 35px;
       left: 5px;
     }
-    & i.fas {
-      color: var(--white-color);
+    & i.fab {
+      color: var(--dark-color);
     }
   }
 
@@ -294,8 +294,8 @@ body {
         stroke: var(--primary-color);
       }
     }
-    & i.fas {
-      color: var(--white-color);
+    & i.fab {
+      color: var(--light-color);
     }
   }
 }
@@ -759,6 +759,10 @@ small {
   & i {
     display: none;
   }
+
+  & #X {
+    display: none;
+  }
 }
 
 .navbar a {
@@ -907,6 +911,14 @@ textarea {
   margin-bottom: 27px;
 }
 
+.form1 textarea {
+  resize: vertical;
+}
+
+input[type="submit"] {
+  margin-bottom: 2rem;
+}
+
 .input-edit {
   outline: none;
   transition: 0.5s;
@@ -970,6 +982,23 @@ a {
     bottom: 7.5vh;
     right: 5vh;
   }
+  .post-buttons {
+    width: 140%;
+    text-align: left;
+    margin-top: 10px;
+    & .btn {
+      width: 5vw;
+    }
+  }
+
+  .comment-buttons {
+    width: 140%;
+    text-align: left;
+    margin-top: 10px;
+    & .btn {
+      width: 55px;
+    }
+  }
 }
 
 @media screen and (max-width: 1000px) {
@@ -1000,11 +1029,11 @@ a {
     margin-bottom: 20px;
   }
 
-  .btn-light {
+  /* .btn-light {
     background-color: var(--dark-color);
     color: var(--white-color);
     margin: 10px 10px 20px 0;
-  }
+  } */
 
   .landing {
     width: 110%;
@@ -1020,19 +1049,26 @@ a {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    flex-grow: 1;
     & #logout {
       display: none;
     }
-    & #tawasol-logo {
-      margin-left: -58vw;
-    }
-    & i {
+    & i.fas.fa-bars {
       display: initial;
       position: relative;
       left: 10px;
-      font-size: larger;
+      font-size: 1.5rem;
       cursor: pointer;
+      color: var(--white-color);
+      transition: 0.25s;
+      &:active {
+        text-shadow: -1px 1px 10px black;
+      }
+    }
+    & #X {
+      display: inline-block;
+      position: relative;
+      visibility: hidden;
+      order: -1;
     }
   }
 
@@ -1042,7 +1078,7 @@ a {
     position: fixed;
     z-index: 1;
     top: 55px;
-    left: 0px;
+    left: -200px;
     background: var(--secondary-color);
     overflow-x: hidden;
     padding-top: 16px;
@@ -1058,7 +1094,7 @@ a {
       visibility: visible;
       left: 15px;
     }
-    .active a::after {
+    & .active a::after {
       transform: scaleX(1);
     }
     & a:hover {
@@ -1180,6 +1216,73 @@ a {
 
   input:checked[id="mode"][type="checkbox"] {
     background-color: var(--dark-color);
+  }
+
+  .main:has(.form1) {
+    padding-top: 1.5rem;
+    margin: 100px auto;
+  }
+
+  .form1 input[type="text"],
+  input[type="date"],
+  input[type="file"],
+  select,
+  textarea {
+    font-size: small;
+    margin: 0 0 1rem 0;
+    transition: 0.3s;
+  }
+
+  .form1 .btn-light {
+    font-size: small;
+  }
+
+  .navbar a:hover {
+    /* opacity: 0.8; */
+    text-decoration: none;
+    color: var(--secondary-color);
+    background-color: white;
+    transition: color 0.25s, background-color 5s;
+    &.logo-navbar {
+      top: 0px;
+      left: 0%;
+      text-shadow: 0 0 0;
+    }
+  }
+
+  /* body {
+    & .light-theme .form1 input[type="text"],
+    input[type="date"],
+    input[type="file"],
+    select,
+    textarea {
+      &:focus {
+        border-color: red;
+      }
+    }
+  } */
+
+  button[type="button"],
+  input[type="submit"] {
+    font-size: small;
+  }
+
+  .post-buttons {
+    width: 140%;
+    text-align: left;
+    margin-top: 10px;
+    & .btn {
+      width: 60px;
+    }
+  }
+
+  .comment-buttons {
+    width: 140%;
+    text-align: left;
+    margin-top: 10px;
+    & .btn {
+      width: 55px;
+    }
   }
 
   .home {

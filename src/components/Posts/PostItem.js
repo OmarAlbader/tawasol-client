@@ -210,7 +210,7 @@ const PostItem = ({
             }
           </small>
           {showActions && (
-            <div>
+            <div className="post-buttons">
               <button
                 type="button"
                 className="btn btn-light"
