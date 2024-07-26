@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../redux/modules/users";
 
@@ -14,6 +14,8 @@ const menuClick = () => {
 };
 
 const Navbar = ({ users: { isAuthenticated }, logout }) => {
+  const location = useLocation();
+
   const links = (
     <ul>
       <li>
@@ -28,11 +30,9 @@ const Navbar = ({ users: { isAuthenticated }, logout }) => {
         <Link id="logout" onClick={logout} to="/">
           Logout
         </Link>
-        <i
-          className="fas fa-bars"
-          onClick={menuClick}
-          hidden={!isAuthenticated}
-        />
+        <span hidden={!isAuthenticated || location.pathname === "/"}>
+          <i className="fas fa-bars" onClick={menuClick} />
+        </span>
       </li>
     </ul>
   );
@@ -46,7 +46,12 @@ const Navbar = ({ users: { isAuthenticated }, logout }) => {
       </h1>
       {/* //TODO: menu button for mobiles to show sidebar */}
       <Fragment>{isAuthenticated ? authlinks : links}</Fragment>
-      <div id="X">X</div>
+      <div
+        id="X"
+        style={isAuthenticated ? { width: "21px" } : { width: "61px" }}
+      >
+        X
+      </div>
     </nav>
   );
 };

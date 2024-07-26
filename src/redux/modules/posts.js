@@ -136,9 +136,6 @@ export const addLike = (id) => async (dispatch) => {
       payload: { id, likes: res.data },
     });
   } catch (err) {
-    const error = err.response.data.msg;
-
-    dispatch(showAlertMessage(error, "error"));
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -156,9 +153,6 @@ export const removeLike = (id) => async (dispatch) => {
       payload: { id, likes: res.data },
     });
   } catch (err) {
-    const error = err.response.data.msg;
-
-    dispatch(showAlertMessage(error, "error"));
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -176,9 +170,6 @@ export const addDislike = (id) => async (dispatch) => {
       payload: { id, dislikes: res.data },
     });
   } catch (err) {
-    const error = err.response.data.msg;
-
-    dispatch(showAlertMessage(error, "error"));
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -196,93 +187,6 @@ export const removeDislike = (id) => async (dispatch) => {
       payload: { id, dislikes: res.data },
     });
   } catch (err) {
-    const error = err.response.data.msg;
-
-    dispatch(showAlertMessage(error, "error"));
-    dispatch({
-      type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
-// Like a comment
-export const likeComment = (postId, commentId) => async (dispatch) => {
-  try {
-    const res = await api.patch(`posts/comment_like/${postId}/${commentId}`);
-
-    dispatch({
-      type: UPDATE_COMMENT_LIKES,
-      payload: { commentId, likes: res.data },
-    });
-  } catch (err) {
-    const error = err.response.data.msg;
-
-    dispatch(showAlertMessage(error, "error"));
-    dispatch({
-      type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
-// Remove like from comment
-export const unlikeComment = (postId, commentId) => async (dispatch) => {
-  try {
-    const res = await api.patch(
-      `posts/remove_comment_like/${postId}/${commentId}`
-    );
-
-    dispatch({
-      type: UPDATE_COMMENT_LIKES,
-      payload: { commentId, likes: res.data },
-    });
-  } catch (err) {
-    const error = err.response.data.msg;
-
-    dispatch(showAlertMessage(error, "error"));
-    dispatch({
-      type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
-// Dislike a comment
-export const dislikeComment = (postId, commentId) => async (dispatch) => {
-  try {
-    const res = await api.patch(`posts/comment_dislike/${postId}/${commentId}`);
-
-    dispatch({
-      type: UPDATE_COMMENT_DISLIKES,
-      payload: { commentId, dislikes: res.data },
-    });
-  } catch (err) {
-    const error = err.response.data.msg;
-
-    dispatch(showAlertMessage(error, "error"));
-    dispatch({
-      type: POST_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
-// Remove dislike from comment
-export const removeCommentDislike = (postId, commentId) => async (dispatch) => {
-  try {
-    const res = await api.patch(
-      `posts/remove_comment_dislike/${postId}/${commentId}`
-    );
-
-    dispatch({
-      type: UPDATE_COMMENT_DISLIKES,
-      payload: { commentId, dislikes: res.data },
-    });
-  } catch (err) {
-    const error = err.response.data.msg;
-
-    dispatch(showAlertMessage(error, "error"));
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },

@@ -2,24 +2,34 @@ import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCurrentProfile } from "../redux/modules/profiles";
+import { logout } from "../redux/modules/users";
 import { getProfileImage } from "../utils";
 import defaultImg from "../assets/default.png";
 
-function Sidebar({ users: { user }, getCurrentProfile }) {
-  const [image, setImage] = useState("");
+function Sidebar({ users: { user }, getCurrentProfile, logout }) {
+  const [pfpImage, setPfpImage] = useState("");
   const [errored, setErrored] = useState(false);
+  const [sidebarLogout, setSidebarLogout] = useState(false);
 
   useEffect(() => {
     getCurrentProfile();
     if (user) {
-      setImage(getProfileImage(user._id));
+      setPfpImage(getProfileImage(user._id));
     }
   }, [getCurrentProfile, user]);
+
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 1000px)").matches) {
+      setSidebarLogout(true);
+    } else {
+      setSidebarLogout(false);
+    }
+  }, []);
 
   function onError() {
     if (!errored) {
       setErrored(true);
-      setImage(defaultImg);
+      setPfpImage(defaultImg);
     }
   }
 
@@ -30,7 +40,7 @@ function Sidebar({ users: { user }, getCurrentProfile }) {
         <div className="pfp-circle">
           <Link to="/home">
             <img
-              src={image || setImage(defaultImg)}
+              src={pfpImage || setPfpImage(defaultImg)}
               onError={onError}
               className="profile"
               alt=""
@@ -75,6 +85,15 @@ function Sidebar({ users: { user }, getCurrentProfile }) {
           <Link to="/settings">Settings</Link>
           <i className="fas fa-gear" />
         </div>
+        <div
+          className={"link-style"}
+          id="sidebar-logout"
+          hidden={!sidebarLogout}
+        >
+          <Link onClick={logout} to="/">
+            Logout
+          </Link>
+        </div>
         {/* // Todo: add logout on mobiles below settings */}
       </div>
     </div>
@@ -83,6 +102,7 @@ function Sidebar({ users: { user }, getCurrentProfile }) {
 
 const mapStateToProps = (state) => ({
   users: state.users,
+  profiles: state.profiles,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(Sidebar);
+export default connect(mapStateToProps, { getCurrentProfile, logout })(Sidebar);

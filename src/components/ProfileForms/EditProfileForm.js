@@ -32,9 +32,10 @@ const ProfileForm = ({
   getCurrentProfile,
   uploadProfileImage,
 }) => {
-  const [formData, setFormData] = useState(initialState);
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
+  const [formData, setFormData] = useState(initialState);
   const [other, setOther] = useState(false);
+  const [data, setData] = useState(null);
 
   const statusOptions = [
     "Developer",
@@ -46,7 +47,6 @@ const ProfileForm = ({
     "Intern",
   ];
 
-  // TODO [DONE] retrieve other's info when go to their profile then immediately go to setting > edit account
   useEffect(() => {
     if (!profile || profile.user._id !== user._id) {
       getCurrentProfile();
@@ -101,13 +101,14 @@ const ProfileForm = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
+    uploadProfileImage(data);
     createProfile(formData, history, profile ? true : false);
   };
 
   const onFileChange = (e) => {
     const data = new FormData();
     data.append("file", e.target.files[0]);
-    uploadProfileImage(data);
+    setData(data);
   };
 
   const onChange = (e) => {

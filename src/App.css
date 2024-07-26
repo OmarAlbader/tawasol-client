@@ -318,15 +318,6 @@ input[id="mode"][type="checkbox"] &:active::before {
   opacity: 0.7;
 }
 
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 ::selection {
   color: var(--primary-color);
   background-color: var(--secondary-color);
@@ -554,7 +545,6 @@ small {
   width: 200px;
   height: 40px;
   margin-bottom: 15px;
-  /* opacity: 0; */
   position: relative;
   left: -150px;
   transition: 0.5s;
@@ -562,7 +552,6 @@ small {
 
 .sidebar:hover > .link-style {
   visibility: visible;
-  /* opacity: 1; */
   left: 15px;
 }
 
@@ -570,7 +559,7 @@ small {
   color: var(--primary-color);
 }
 
-.sidebar > .settings {
+.sidebar .settings {
   position: absolute;
   left: -152px;
   bottom: 75px;
@@ -821,7 +810,7 @@ ul {
   transition: 0.3s;
   width: 100%;
   border-radius: 5px;
-  height: auto;
+  height: 300px;
   cursor: pointer;
   margin-bottom: 15px;
 }
@@ -881,7 +870,7 @@ ul {
 }
 
 form.form1 {
-  padding-top: 20px;
+  padding: 20px 0;
 }
 
 .form-title {
@@ -916,7 +905,7 @@ textarea {
 }
 
 input[type="submit"] {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .input-edit {
@@ -982,15 +971,17 @@ a {
     bottom: 7.5vh;
     right: 5vh;
   }
+  #post-button {
+    margin-left: 15px;
+  }
   .post-buttons {
     width: 140%;
     text-align: left;
     margin-top: 10px;
     & .btn {
-      width: 5vw;
+      width: 60px;
     }
   }
-
   .comment-buttons {
     width: 140%;
     text-align: left;
@@ -1004,13 +995,29 @@ a {
 @media screen and (max-width: 1000px) {
   .main {
     width: 80%;
-    & input.input-text {
+    /* & input.input-text {
       margin-left: 40px;
+      } */
+    &:has(.form1) {
+      padding-top: 1.5rem;
+      margin: 125px auto;
     }
   }
 
+  .main.login {
+    height: 400px;
+    width: 300px;
+  }
+
+  .main.register {
+    height: 500px;
+    width: 350px;
+  }
+
   .btn {
+    /* display: block; */
     width: 90px;
+    margin: 10px auto;
   }
 
   .home {
@@ -1113,6 +1120,16 @@ a {
         transform: scaleX(1);
       }
     }
+    & .settings {
+      position: absolute;
+      left: 15px;
+      bottom: 130px;
+    }
+    & #sidebar-logout {
+      position: absolute;
+      left: 15px;
+      bottom: 75px;
+    }
   }
 
   * :not(.sidebar):focus {
@@ -1124,40 +1141,42 @@ a {
   .mode-container {
     z-index: 99;
     position: fixed;
-    overflow: hdden;
+    overflow: hidden;
     top: 15px;
     right: 25px;
-    width: 75px;
-    height: 35px;
+    width: 60px;
+    height: 30px;
     border-radius: 20px;
     background-color: var(--white-color);
     transition: 0.5s;
     & #moon {
       position: relative;
+      font-size: 15px;
       width: 15px;
       height: 15px;
-      top: -37.5px;
+      top: -34.5px;
       left: -80px;
       color: var(--dark-color);
       transition: 0.5s;
     }
     & input:checked[id="mode"][type="checkbox"] ~ #sun {
-      left: 12.5px;
+      left: 8px;
       ~ #moon {
-        left: 145px;
+        left: 130px;
       }
     }
     & #sun {
       position: relative;
-      width: 20px;
-      height: 20px;
-      top: -37px;
-      left: -95px;
+      font-size: 15px;
+      width: 15px;
+      height: 15px;
+      top: -34.5px;
+      left: -102px;
       color: var(--white-color);
       transition: 0.5s;
     }
     & input[id="mode"][type="checkbox"] ~ #moon {
-      left: 30px;
+      left: 22px;
     }
   }
 
@@ -1165,8 +1184,8 @@ a {
     position: fixed;
     top: 15px;
     right: 25px;
-    width: 75px;
-    height: 35px;
+    width: 60px;
+    height: 30px;
     border-radius: 20px;
     background-color: transparent;
     z-index: 1;
@@ -1178,25 +1197,33 @@ a {
     }
   }
 
+  body.light-theme
+    .mode-click:active
+    ~ input[id="mode"][type="checkbox"]::before {
+    border-radius: 50%;
+    width: 26px;
+    left: 5px;
+  }
+
   body.dark-theme
     .mode-click:active
     ~ input[id="mode"][type="checkbox"]::before {
-    border-radius: 47.5%;
-    width: 35px;
-    left: -5px;
+    border-radius: 50%;
+    width: 26px;
+    left: -12px;
   }
 
   input[id="mode"][type="checkbox"] {
     position: relative;
     top: 0px;
     left: 0px;
-    width: 75px;
-    height: 35px;
+    width: 60px;
+    height: 30px;
     appearance: none;
     outline: none;
     border-radius: 20px;
-    box-shadow: inset 0 2px 2px var(--dark-color),
-      inset 0 -2px 2px var(--dark-color);
+    box-shadow: inset 0 1.5px 1.5px var(--dark-color),
+      inset 0 -1.5px 1.5px var(--dark-color);
     transition: 0.5s;
     cursor: pointer;
   }
@@ -1204,13 +1231,13 @@ a {
   input[id="mode"][type="checkbox"]::before {
     content: "";
     position: absolute;
-    width: 27px;
-    height: 27px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     top: 4px;
     left: 4px;
     background-color: var(--secondary-color);
-    box-shadow: inset 0 2px 2px #ffffff33, inset 0 -2px 2px #ffffff33;
+    box-shadow: inset 0 1.5px 1.5px #ffffff33, inset 0 -1.5px 1.5px #ffffff33;
     transition: 0.5s;
   }
 
@@ -1218,14 +1245,14 @@ a {
     background-color: var(--dark-color);
   }
 
-  .main:has(.form1) {
-    padding-top: 1.5rem;
-    margin: 100px auto;
+  input:checked[id="mode"][type="checkbox"]::before {
+    left: -6px;
   }
 
   .form1 input[type="text"],
-  input[type="date"],
+  input[type="password"],
   input[type="file"],
+  input[type="date"],
   select,
   textarea {
     font-size: small;
@@ -1237,34 +1264,24 @@ a {
     font-size: small;
   }
 
-  .navbar a:hover {
+  .navbar a:active {
     /* opacity: 0.8; */
     text-decoration: none;
-    color: var(--secondary-color);
-    background-color: white;
-    transition: color 0.25s, background-color 5s;
+    color: var(--primary-color);
     &.logo-navbar {
-      top: 0px;
-      left: 0%;
-      text-shadow: 0 0 0;
+      top: 2px;
+      left: 2px;
+      text-shadow: -2px -2px 5px black;
     }
   }
-
-  /* body {
-    & .light-theme .form1 input[type="text"],
-    input[type="date"],
-    input[type="file"],
-    select,
-    textarea {
-      &:focus {
-        border-color: red;
-      }
-    }
-  } */
 
   button[type="button"],
   input[type="submit"] {
     font-size: small;
+  }
+
+  #back-btn {
+    margin-left: 10px;
   }
 
   .post-buttons {
@@ -1273,6 +1290,7 @@ a {
     margin-top: 10px;
     & .btn {
       width: 60px;
+      margin: 10px;
     }
   }
 
@@ -1282,6 +1300,7 @@ a {
     margin-top: 10px;
     & .btn {
       width: 55px;
+      margin: 10px;
     }
   }
 

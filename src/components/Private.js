@@ -21,7 +21,12 @@ window.addEventListener("scroll", function () {
 
       document.getElementById("sidebar").style.top = "55px";
 
-      document.getElementById("settings").style.bottom = "75px";
+      if (this.window.matchMedia("(min-width: 1000px)").matches) {
+        document.getElementById("settings").style.bottom = "75px";
+      } else {
+        document.getElementById("settings").style.bottom = "130px";
+        document.getElementById("sidebar-logout").style.bottom = "75px";
+      }
     }
     // Scrolling UP
     scrollDownCount = document.body.getBoundingClientRect().top;
@@ -39,7 +44,12 @@ window.addEventListener("scroll", function () {
       if (document.getElementById("sidebar") !== null) {
         document.getElementById("sidebar").style.top = "0";
 
-        document.getElementById("settings").style.bottom = "20px";
+        if (window.matchMedia("(min-width: 1000px)").matches) {
+          document.getElementById("settings").style.bottom = "20px";
+        } else {
+          document.getElementById("settings").style.bottom = "75px";
+          document.getElementById("sidebar-logout").style.bottom = "20px";
+        }
       }
 
       // Scrolling DOWN

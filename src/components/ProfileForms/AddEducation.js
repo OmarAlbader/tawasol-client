@@ -87,7 +87,7 @@ const AddEducation = ({ addEducation, history }) => {
           />
         </div>
         <input type="submit" className="btn btn-primary" />
-        <Link className="btn btn-light" to="/home">
+        <Link className="btn btn-light" id="back-btn" to="/home">
           Go Back
         </Link>
       </form>

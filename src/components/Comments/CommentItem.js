@@ -1,18 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { formatDate, getProfileImage } from "../../utils";
-import {
-  editComment,
-  deleteComment,
-  addLike,
-  removeLike,
-  addDislike,
-  removeDislike,
-  likeComment,
-  unlikeComment,
-  dislikeComment,
-  removeCommentDislike,
-} from "../../redux/modules/posts";
+import { getProfileImage } from "../../utils";
+import { editComment, deleteComment } from "../../redux/modules/posts";
 import { getCurrentProfile } from "../../redux/modules/profiles";
 import defaultImg from "../../assets/default.png";
 
@@ -20,72 +9,16 @@ const moment = require("moment");
 
 const CommentItem = ({
   postId,
-  // post: { likes, dislikes },
-  comment: { _id, text, name, user, date, likes, dislikes },
+  comment: { _id, text, name, user, date },
   users,
   editComment,
   deleteComment,
-  likeComment,
-  unlikeComment,
-  dislikeComment,
-  removeCommentDislike,
   getCurrentProfile,
 }) => {
-  const [like, setLike] = useState(
-    likes.some((like) => like.user === users.user._id)
-  );
-  const [dislike, setDislike] = useState(
-    dislikes.some((dislike) => dislike.user === users.user._id)
-  );
   const [txt, setTxt] = useState(text);
   const [edit, setEdit] = useState(false);
   const [image, setImage] = useState("");
   const [errored, setErrored] = useState(false);
-
-  // TODO: fix race condition in like and dislike
-  const likeHandle = () => {
-    // Insuring that the user will either like or dislike the post and not both in the same time.
-    if (dislike) {
-      setDislike(false);
-
-      if (dislikes.some((dislike) => dislike.user === users.user._id))
-        removeCommentDislike(postId, _id);
-    }
-
-    if (!like) {
-      setLike(true);
-
-      if (likes.every((like) => like.user !== users.user._id))
-        likeComment(postId, _id);
-    } else {
-      setLike(false);
-
-      if (likes.some((like) => like.user === users.user._id))
-        unlikeComment(postId, _id);
-    }
-  };
-
-  const dislikeHandle = () => {
-    // Insuring that the user will either like or dislike the post and not both in the same time.
-    if (like) {
-      setLike(false);
-
-      if (likes.some((like) => like.user === users.user._id))
-        unlikeComment(postId, _id);
-    }
-
-    if (!dislike) {
-      setDislike(true);
-
-      if (dislikes.every((dislike) => dislike.user !== users.user._id))
-        dislikeComment(postId, _id);
-    } else {
-      setDislike(false);
-
-      if (dislikes.some((dislike) => dislike.user === users.user._id))
-        removeCommentDislike(postId, _id);
-    }
-  };
 
   useEffect(() => {
     if (user) {
@@ -189,39 +122,9 @@ const CommentItem = ({
           )}
 
           <small style={{ color: "gray" }}>
-            Since{" "}
-            {
-              moment(date).fromNow()
-              /*formatDate(date)*/
-            }
+            Since {moment(date).fromNow()}
           </small>
           <div className="comment-buttons">
-            <button
-              type="button"
-              id="like"
-              className="btn btn-light"
-              onClick={likeHandle}
-              style={
-                like ? { color: "#f4ce14", backgroundColor: "#495e57" } : null
-              }
-            >
-              <i className="fas fa-thumbs-up" />
-              {likes.length > 0 && <span> {likes.length}</span>}
-            </button>
-            <button
-              type="button"
-              id="dislike"
-              className="btn btn-light"
-              onClick={dislikeHandle}
-              style={
-                dislike
-                  ? { color: "#f4ce14", backgroundColor: "#495e57" }
-                  : null
-              }
-            >
-              <i className="fas fa-thumbs-down" />
-              {dislikes.length > 0 && <span> {dislikes.length}</span>}
-            </button>
             {!users.loading && user === users.user._id && (
               <>
                 {!edit && (
@@ -259,14 +162,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   editComment,
-  likeComment,
-  unlikeComment,
-  addLike,
-  removeLike,
-  addDislike,
-  removeDislike,
-  dislikeComment,
-  removeCommentDislike,
   deleteComment,
   getCurrentProfile,
 })(CommentItem);

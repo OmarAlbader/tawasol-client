@@ -36,6 +36,7 @@ const PostForm = ({ addPost }) => {
         <input
           type="submit"
           value="Post"
+          id="post-button"
           className="btn btn-primary"
           style={{ color: "#f4ce14" }}
         />
