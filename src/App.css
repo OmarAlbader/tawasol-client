@@ -164,6 +164,9 @@ body {
     & .form-title {
       color: var(--secondary-color);
     }
+    & input:focus {
+      border: 2px solid var(--secondary-color) !important;
+    }
     & .navbar {
       border-bottom: solid 3px var(--white-color);
     }
@@ -221,6 +224,9 @@ body {
     & .form-title {
       color: var(--primary-color);
     }
+    & input:focus {
+      border: 2px solid var(--secondary-color) !important;
+    }
     & .navbar {
       border-bottom: solid 3px var(--dark-color);
     }
@@ -264,7 +270,7 @@ body {
     & input:checked[id="mode"][type="checkbot"] {
       background-color: red;
     }
-    & .input-text:focus {
+    & input:focus {
       border: 2px solid var(--primary-color) !important;
     }
     & .input-edit {
