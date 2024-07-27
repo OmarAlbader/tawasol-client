@@ -1,15 +1,21 @@
 import { Link, useLocation } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCurrentProfile } from "../redux/modules/profiles";
 import { logout } from "../redux/modules/users";
 import { getProfileImage } from "../utils";
 import defaultImg from "../assets/default.png";
 
-function Sidebar({ users: { user }, getCurrentProfile, logout }) {
+function Sidebar({
+  users: { user },
+  profiles: { profile },
+  getCurrentProfile,
+  logout,
+}) {
   const [pfpImage, setPfpImage] = useState("");
   const [errored, setErrored] = useState(false);
   const [sidebarLogout, setSidebarLogout] = useState(false);
+  let image = useSelector((profile) => profile.image);
 
   useEffect(() => {
     getCurrentProfile();
@@ -40,7 +46,7 @@ function Sidebar({ users: { user }, getCurrentProfile, logout }) {
         <div className="pfp-circle">
           <Link to="/home">
             <img
-              src={pfpImage || setPfpImage(defaultImg)}
+              src={image || pfpImage || setPfpImage(defaultImg)}
               onError={onError}
               className="profile"
               alt=""

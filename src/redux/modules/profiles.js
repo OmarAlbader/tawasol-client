@@ -291,7 +291,7 @@ export default function reducer(state = initialState, action) {
     case UPLOAD_PROFILE_IMAGE:
       return {
         ...state,
-        image: payload,
+        image: action.payload,
       };
     default:
       return state;
