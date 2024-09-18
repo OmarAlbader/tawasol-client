@@ -10,7 +10,7 @@ import {
 } from "../../redux/modules/posts";
 import { getCurrentProfile } from "../../redux/modules/profiles";
 import defaultImg from "../../assets/default.png";
-import { formatDate, getProfileImage } from "../../utils";
+import { getProfileImage } from "../../utils";
 import React, { useEffect, useState } from "react";
 
 const moment = require("moment");
@@ -206,7 +206,6 @@ const PostItem = ({
             Since{" "}
             {
               moment(date).fromNow()
-              /*Posted at {formatDate(date)}*/
             }
           </small>
           {showActions && (
