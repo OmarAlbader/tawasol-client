@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { formatDate, getProfileImage } from "../../utils";
+import { getProfileImage } from "../../utils";
 import {
   editComment,
   deleteComment,
@@ -192,7 +192,6 @@ const CommentItem = ({
             Since{" "}
             {
               moment(date).fromNow()
-              /*formatDate(date)*/
             }
           </small>
           <div className="comment-buttons">
